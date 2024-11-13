@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    <title>Edit Task - Taskmate</title>
+{% endblock title %}
+
+{% block content %}
+    <div class="container">
+
+
+     <form class="mt-4" method="POST">
+            {% csrf_token %}
+            <div class="mb-3">
+                <input type="text" value="{{ task_obj.task }}" class="form-control" name="task" id="exampleInputEmail1"
+                       aria-describedby="emailHelp">
+                 <input type="hidden" name="done" value="{{ task_obj.done }}">
+            </div>
+
+            <button type="submit" class="btn btn-primary">Update Task</button>
+        </form>
+
+    </div>
+{% endblock content %}
