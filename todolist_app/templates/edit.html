@@ -7,17 +7,20 @@
 {% block content %}
     <div class="container">
 
+        {% if task_obj.manager == request.user %}
+            <form class="mt-4" method="POST">
+                {% csrf_token %}
+                <div class="mb-3">
+                    <input type="text" value="{{ task_obj.task }}" class="form-control" name="task"
+                           id="exampleInputEmail1"
+                           aria-describedby="emailHelp">
+                    <input type="hidden" name="done" value="{{ task_obj.done }}">
+                </div>
 
-     <form class="mt-4" method="POST">
-            {% csrf_token %}
-            <div class="mb-3">
-                <input type="text" value="{{ task_obj.task }}" class="form-control" name="task" id="exampleInputEmail1"
-                       aria-describedby="emailHelp">
-                 <input type="hidden" name="done" value="{{ task_obj.done }}">
-            </div>
-
-            <button type="submit" class="btn btn-primary">Update Task</button>
-        </form>
-
+                <button type="submit" class="btn btn-primary">Update Task</button>
+            </form>
+        {% else %}
+            <p class="mt-4">Access Restricted. You Are Not Allowed!</p>
+        {% endif %}
     </div>
 {% endblock content %}

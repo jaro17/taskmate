@@ -41,12 +41,43 @@
             </ul>
         </div>
     </div>
+
+    {% if user.is_authenticated %}
+        {% comment %} <div class="d-flex w-50">
+            <p class=" bg-body-tertiary text-white">Logged in as {{ user.username }}</p>
+            <form method="POST" class="d-flex w-50 " action="{% url 'logout' %}">
+                {% csrf_token %}
+                <button class="btn btn-info my-2 my-sm-0 btn-sm" type="submit">Logout</button>
+            </form>
+        </div>{% endcomment %}
+        <p class=" bg-body-tertiary text-white d-flex">Logged in as {{ user.username }}</p>
+        <ul class="navbar-nav">
+            <li class="nav-item me-5">
+                <form method="POST" action="{% url 'logout' %}">
+                    {% csrf_token %}
+                    <button class="btn btn-link nav-link" type="submit">Logout</button>
+                </form>
+            </li>
+        </ul>
+    {% else %}
+        <div class="d-flex btn-outline-primary" style="width: -5rem">
+            <form method="POST" class="d-flex me-3" action="{% url 'login' %}">
+                {% csrf_token %}
+                <button class="btn btn-outline-primary my-2 my-sm-0 btn-sm" type="submit">Login</button>
+            </form>
+            <form method="POST" class="d-flex me-3" action="{% url 'register' %}">
+                {% csrf_token %}
+                <button class="btn btn-outline-primary my-2 my-sm-0 btn-sm" type="submit">Register</button>
+            </form>
+        </div>
+    {% endif %}
+
 </nav>
 
 <style>
-    .bg-light {
-        background-color: $indigo-100 !important;
-    }
+    {% comment %}   .bg-light {
+           background-color: $ indigo-100 !important;
+       }{% endcomment %}
 </style>
 
 {% block content %}
