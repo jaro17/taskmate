@@ -16,6 +16,7 @@ import environ
 from django.contrib import staticfiles
 
 env = environ.Env()
+BASE_DIR = Path(__file__).resolve().parent.parent
 environ.Env.read_env(os.path.join(BASE_DIR, '.env'))
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
